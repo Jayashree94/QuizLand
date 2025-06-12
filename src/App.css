@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@200;300&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.app{
+    min-height: 98.5vh;
+    background-size: cover;
+  background-repeat: no-repeat;
+}
+
+*::-webkit-scrollbar{
+    width: 8px;
+    background-color: gray;
+}
