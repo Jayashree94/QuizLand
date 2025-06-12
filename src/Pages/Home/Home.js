@@ -3,6 +3,7 @@ import "./Home.css";
 import { Menu, MenuItem, TextField, Button } from "@mui/material";
 import Categories from '../../Data/Categories';
 import {useNavigate} from "react-router-dom";
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 const Home = ({name, setName}) => {
 
