@@ -10,7 +10,7 @@ import NotFound from './Pages/NotFound/NotFound';
 function App() {
   return (
     <BrowserRouter>
-    <div className="app" style ={{backgroundImage: "url(/bg_img1.png)"}}>
+    <div className="app" style ={{backgroundImage: "url(/img3.png)"}}>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
