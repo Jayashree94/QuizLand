@@ -1,29 +1,42 @@
 import React, { use, useState } from 'react'
 import "./Home.css";
-import { Menu, MenuItem, TextField, Button } from "@mui/material";
+import { MenuItem, TextField, Button } from "@mui/material";
 import Categories from '../../Data/Categories';
 import {useNavigate} from "react-router-dom";
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+
 
 const Home = ({name, setName}) => {
 
   const[category, setCategory] = useState("");
   const[difficulty,setDifficulty]=useState("");
   const[error,setError] =useState(false);
+  const API_URL = "https://opentdb.com/api.php?amount=10&category="+{category}+"&difficulty="+{difficulty}+"&type=multiple"
+  const API_URL1 = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple";
 
   const navigate = useNavigate();
 
-  const fetchQuestions = () => {
+   const fetchQuestions = async(category, difficulty) => {
+    console.log(category);
+    console.log(difficulty);
+    console.log(API_URL);
+    const data = await fetch(API_URL1)
+        const result = await data.json();
+        console.log(result.results);
+      }
+      
 
-  }
   const handleClick = () => {
     if(!category || !difficulty || !name){
       setError(true);
       return;
     } else {
       setError(false);
+      console.log("point1")
       fetchQuestions(category, difficulty);
-      navigate("/quiz");
+      console.log("point2");
+      navigate('/quiz');
+      console.log("point3");
 
     }
 
@@ -55,6 +68,7 @@ const Home = ({name, setName}) => {
             </MenuItem>
           ))}
           </TextField> 
+        
 
           <TextField style = {{marginBottom: 25}} 
           onChange={e=>(setDifficulty(e.target.value))}
@@ -64,10 +78,10 @@ const Home = ({name, setName}) => {
             <MenuItem key="Easy" value="easy">
             Easy
             </MenuItem>
-            <MenuItem key="Easy" value="easy">
+            <MenuItem key="Medium" value="easy">
             Medium
             </MenuItem>
-            <MenuItem key="Easy" value="easy">
+            <MenuItem key="Hard" value="easy">
             Hard
             </MenuItem>
       
