@@ -24,7 +24,7 @@ const Home = ({name, setName}) => {
         var result = await data.json();
         setQuestions(result.results);
          console.log(result.results);
-         console.log({questions});
+         console.log({questions}); //not working
       }
       
 
