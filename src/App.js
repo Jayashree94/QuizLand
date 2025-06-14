@@ -11,8 +11,7 @@ import { useState } from 'react';
 
 function App() {
   const [name, setName] = useState("");
-  const [questions, setQuestions] = useState();
-  const [score, setScore] = useState(0);
+  
 
 
   return (
@@ -21,7 +20,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home name={name} setName={setName}  />} />
-        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/quiz" element={<Quiz name ={name} />} />
         <Route path="/result" element={<Result />} />
         <Route path="*" element={<NotFound />} /> {/* Catch-all for 404 */}
       </Routes>     

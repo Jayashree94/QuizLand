@@ -11,18 +11,20 @@ const Home = ({name, setName}) => {
   const[category, setCategory] = useState("");
   const[difficulty,setDifficulty]=useState("");
   const[error,setError] =useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [score, setScore] = useState(0);
+
   const API_URL = "https://opentdb.com/api.php?amount=10&category="+{category}+"&difficulty="+{difficulty}+"&type=multiple"
   const API_URL1 = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple";
 
   const navigate = useNavigate();
 
-   const fetchQuestions = async(category, difficulty) => {
-    console.log(category);
-    console.log(difficulty);
-    console.log(API_URL);
+   const fetchQuestions = async() => {
     const data = await fetch(API_URL1)
-        const result = await data.json();
-        console.log(result.results);
+        var result = await data.json();
+        setQuestions(result.results);
+         console.log(result.results);
+         console.log({questions});
       }
       
 
@@ -32,11 +34,10 @@ const Home = ({name, setName}) => {
       return;
     } else {
       setError(false);
-      console.log("point1")
-      fetchQuestions(category, difficulty);
-      console.log("point2");
-      navigate('/quiz');
-      console.log("point3");
+      fetchQuestions();
+      //navigate('/quiz',{state:{ questions: questions, setQuestions: setQuestions }});
+      navigate('/quiz',{state:{ word:questions, word1 : " jaya" }});
+      
 
     }
 
@@ -47,6 +48,7 @@ const Home = ({name, setName}) => {
       <div className='settings'>
         <span style={{fontSize: 40, fontWeight: 600}}>
           Quiz Settings
+          {questions}
         </span>
 
         <div className='settings_select'>
