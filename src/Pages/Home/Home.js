@@ -1,8 +1,8 @@
-import React, { use, useState } from 'react'
+import React, { use, useState, useEffect } from 'react'
 import "./Home.css";
 import { MenuItem, TextField, Button } from "@mui/material";
 import Categories from '../../Data/Categories';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 
@@ -14,21 +14,18 @@ const Home = ({name, setName}) => {
   const [questions, setQuestions] = useState([]);
   const [score, setScore] = useState(0);
 
-  const API_URL = "https://opentdb.com/api.php?amount=10&category="+{category}+"&difficulty="+{difficulty}+"&type=multiple"
   const API_URL1 = "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple";
 
   const navigate = useNavigate();
-
-   const fetchQuestions = async() => {
+  
+    const fetchQuestions = async() => {
     const data = await fetch(API_URL1)
-        var result = await data.json();
-        setQuestions(result.results);
-         console.log(result.results);
-         console.log({questions}); //not working
+        const result = await data.json();
+        setQuestions(result.results);        
+         
       }
-      
-
-  const handleClick = () => {
+      console.log(questions); //not working**
+    const handleClick = () => {
     if(!category || !difficulty || !name){
       setError(true);
       return;
@@ -36,7 +33,7 @@ const Home = ({name, setName}) => {
       setError(false);
       fetchQuestions();
       //navigate('/quiz',{state:{ questions: questions, setQuestions: setQuestions }});
-      navigate('/quiz',{state:{ word:questions, word1 : " jaya" }});
+      //navigate('/quiz',{state:{ word:questions, word1 : " jaya" }});
       
 
     }
@@ -44,11 +41,13 @@ const Home = ({name, setName}) => {
   }
   
   return (
+  
     <div className='content'>
+        <img src="/quizimg.png" width="500px" className='banner' alt='quiz banner img'></img>
+      
       <div className='settings'>
         <span style={{fontSize: 40, fontWeight: 600}}>
-          Quiz Settings
-          {questions}
+        Select your interview type
         </span>
 
         <div className='settings_select'>
@@ -91,13 +90,27 @@ const Home = ({name, setName}) => {
 
           <Button variant="contained"
           onClick={handleClick}>
-            Start Quiz
+            Get Sample questions & answers
           </Button>
+          <br></br>
+          <ul>
+      {questions.map((question) => (
+        <>
+        <li key={question.index}>{question.question}</li>
+        Answer : <h3 key={question.index}>{question.correct_answer}</h3>
+        <br></br>
+        </>
+      ))}
 
-        </div>
-      </div>
-      <img src="/quizimg.png" width="500px" className='banner' alt='quiz banner img'></img>
+      
+    </ul>
+
     </div>
+      </div>
+      
+    </div>
+  
+    
   )
 }
 
